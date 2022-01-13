@@ -2,9 +2,10 @@ import 'package:fitness_app/widgets/auth_card.dart';
 import 'package:flutter/material.dart';
 
 class AuthScreen extends StatelessWidget {
-  static const String routeName = '/';
+  static const String routeName = '/auth';
 
   const AuthScreen();
+
   @override
   Widget build(BuildContext context) {
     final Size size = MediaQuery.of(context).size;
@@ -13,6 +14,7 @@ class AuthScreen extends StatelessWidget {
         width: size.width,
         height: size.height,
         padding: const EdgeInsets.all(55),
+        color: Theme.of(context).colorScheme.background,
         child: Column(
           mainAxisAlignment: MainAxisAlignment.end,
           children: [
@@ -33,8 +35,10 @@ class AuthScreen extends StatelessWidget {
                 ],
               ),
             ),
-            SizedBox(height: 40),
-            AuthCard(),
+            SizedBox(height: size.height * 0.2),
+            const Flexible(
+              child: const AuthCard(),
+            ),
           ],
         ),
       ),
