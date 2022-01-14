@@ -1,7 +1,8 @@
 import 'package:fitness_app/models/session.dart';
 import 'package:fitness_app/providers/sessions.dart';
+import 'package:fitness_app/screens/session_detail_screen.dart';
+import 'package:fitness_app/widgets/session_item.dart';
 import 'package:flutter/material.dart';
-import 'package:intl/intl.dart';
 import 'package:provider/provider.dart';
 
 class SessionsList extends StatelessWidget {
@@ -9,7 +10,8 @@ class SessionsList extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    List<Session> sessions = Provider.of<Sessions>(context).sessions;
+    List<Session> sessions = Provider.of<Sessions>(context).sessions.reversed.toList();
+    if (sessions.isEmpty) return Center(child: Text('No Sessions Yet'));
     return ListView.builder(
       itemBuilder: (context, index) {
         final Session sess = sessions[index];
@@ -29,42 +31,11 @@ class SessionsList extends StatelessWidget {
             alignment: Alignment.centerRight,
             padding: const EdgeInsets.only(right: 24),
           ),
-          child: ListTile(
-            title: Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                Text(
-                  DateFormat('MMMM dd').format(sess.day),
-                  style: const TextStyle(
-                    color: Colors.grey,
-                    fontSize: 12,
-                  ),
-                ),
-                Row(
-                  children: [
-                    Text(
-                      sess.start.format(context),
-                      style: const TextStyle(
-                        fontSize: 16,
-                      ),
-                    ),
-                    const Text(
-                      ' - ',
-                      style: TextStyle(
-                        color: Colors.grey,
-                        fontSize: 16,
-                      ),
-                    ),
-                    Text(
-                      sess.end.format(context),
-                      style: const TextStyle(
-                        fontSize: 16,
-                      ),
-                    ),
-                  ],
-                ),
-              ],
-            ),
+          child: GestureDetector(
+            onTap: () async {
+              await Navigator.of(context).pushNamed(SessionDetailScreen.routeName, arguments: sess.id);
+            },
+            child: SessionItem(sess),
           ),
         );
       },

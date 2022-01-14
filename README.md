@@ -113,3 +113,15 @@ Provider.of<Sessions>(context).addSession(sessionArg);
 
 5. notifyListeners() will rebuild all places where Provider.of<Sessions> is used.
 6. \*Optional: Use Consumer<Sessions> widget where you use the provider in only a part of your widget
+
+## Run Code After initState()
+
+```dart
+@override
+void initState() {
+  super.initState();
+  WidgetsBinding.instance?.addPostFrameCallback((timeStamp) {
+    // _navigatePage(context);
+  });
+}
+```

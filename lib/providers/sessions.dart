@@ -4,10 +4,11 @@ import 'package:flutter/material.dart';
 class Sessions with ChangeNotifier {
   // ignore: prefer_final_fields
   List<Session> _sessions = [
-    Session(DateTime(2021, 1, 2), TimeOfDay(hour: 16, minute: 20), TimeOfDay(hour: 17, minute: 20)),
-    Session(DateTime(2021, 1, 8), TimeOfDay(hour: 12, minute: 0), TimeOfDay(hour: 13, minute: 0)),
-    Session(DateTime(2021, 1, 9), TimeOfDay(hour: 14, minute: 20), TimeOfDay(hour: 15, minute: 20)),
-    Session(DateTime(2021, 1, 10), TimeOfDay(hour: 16, minute: 0), TimeOfDay(hour: 17, minute: 0)),
+    Session(DateTime(2022, 1, 1), const TimeOfDay(hour: 16, minute: 20), const TimeOfDay(hour: 17, minute: 20)),
+    Session(DateTime(2022, 1, 2), const TimeOfDay(hour: 16, minute: 20), const TimeOfDay(hour: 17, minute: 20)),
+    Session(DateTime(2022, 1, 8), const TimeOfDay(hour: 12, minute: 0), const TimeOfDay(hour: 13, minute: 0)),
+    Session(DateTime(2022, 1, 9), const TimeOfDay(hour: 14, minute: 20), const TimeOfDay(hour: 15, minute: 20)),
+    Session(DateTime(2022, 1, 10), const TimeOfDay(hour: 16, minute: 0), const TimeOfDay(hour: 17, minute: 0)),
   ];
 
   void addSession(Session session) {
@@ -22,5 +23,14 @@ class Sessions with ChangeNotifier {
 
   List<Session> get sessions {
     return [..._sessions];
+  }
+
+  Session getSession(String id) {
+    return _sessions.firstWhere((element) => id == element.id);
+  }
+
+  void organizeList() {
+    _sessions.sort((a, b) => a.day.difference(b.day).inHours);
+    notifyListeners();
   }
 }

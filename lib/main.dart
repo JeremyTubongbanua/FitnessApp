@@ -1,10 +1,11 @@
-import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:fitness_app/firebase_options.dart';
 import 'package:fitness_app/providers/sessions.dart';
 import 'package:fitness_app/screens/auth_screen.dart';
-import 'package:fitness_app/screens/home_screen.dart';
-import 'package:fitness_app/screens/start_screen.dart';
+import 'package:fitness_app/screens/first_screen.dart';
+import 'package:fitness_app/screens/tabs/sessions_tab.dart';
+import 'package:fitness_app/screens/session_detail_screen.dart';
+import 'package:fitness_app/screens/tabs_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
@@ -17,7 +18,7 @@ class FitnessApp extends StatelessWidget {
           primary: Colors.black,
           primaryVariant: Color.fromRGBO(72, 167, 255, 1),
           secondary: Colors.orange,
-          background: Color.fromRGBO(220, 238, 255, 1),
+          background: Colors.white,
         ),
         textTheme: Theme.of(context).textTheme.copyWith(
               headline6: const TextStyle(
@@ -27,7 +28,7 @@ class FitnessApp extends StatelessWidget {
                 fontSize: 48,
               ),
               headline5: const TextStyle(
-                color: Colors.black,
+                color: Colors.white,
                 fontWeight: FontWeight.w400,
                 fontFamily: 'Cairo',
                 fontSize: 24,
@@ -35,9 +36,10 @@ class FitnessApp extends StatelessWidget {
             ),
       ),
       routes: {
-        StartScreen.routeName: (_) => const StartScreen(),
-        AuthScreen.routeName: (_) => const AuthScreen(),
-        HomeScreen.routeName: (_) => const HomeScreen(),
+        '/': (_) => const FirstScreen(),
+        TabsScreen.routeName: (_) => const TabsScreen(), // '/home'
+        SessionDetailScreen.routeName: (_) => const SessionDetailScreen(), // '/session-detail'
+        AuthScreen.routeName: (_) => const AuthScreen(), // '/auth'
       },
     );
     return MultiProvider(

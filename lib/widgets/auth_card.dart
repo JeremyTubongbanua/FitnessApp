@@ -1,6 +1,6 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:fitness_app/models/mode.dart';
-import 'package:fitness_app/screens/home_screen.dart';
+import 'package:fitness_app/screens/tabs/sessions_tab.dart';
 import 'package:flutter/material.dart';
 
 class AuthCard extends StatefulWidget {
@@ -97,7 +97,7 @@ class _AuthCardState extends State<AuthCard> {
                     _isLoading = true;
                   });
                   await FirebaseAuth.instance.signInWithEmailAndPassword(email: _emailController.text, password: _passwordController.text);
-                  await Navigator.of(context).pushReplacementNamed(HomeScreen.routeName, arguments: null);
+                  await Navigator.of(context).pushReplacementNamed(SessionsTab.routeName, arguments: null);
                 } catch (err) {
                   final snackBarStr = err.toString();
                   _showSnackBar(context, snackBarStr);
